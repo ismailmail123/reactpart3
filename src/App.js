@@ -70,6 +70,9 @@ function App() {
     let filteredData = data.filter((product) => product.id !== id)
     setProducts(filteredData)
   }
+  function handleDeleteAll () {
+
+  }
 
   return (
     <>
