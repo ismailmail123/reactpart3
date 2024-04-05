@@ -50,7 +50,7 @@ input{
 }
 .delete-all{
   display: flex;
-  width: 80%;
+  width: 70%;
   height: 30px;
   justify-content: start;
 }
