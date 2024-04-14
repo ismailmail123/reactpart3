@@ -48,19 +48,28 @@ input{
 .list h3 {
   margin-bottom: 5px;
 }
-.delete-all{
+.select-all{
   display: flex;
-  width: 70%;
+  width: 80%;
   height: 30px;
   justify-content: start;
 }
-.delete-all input{
+.select-all input{
   width: 20px;
   padding: 0;
 }
-.delete-all p{
+.select-all p{
   padding: 7px 5px;
   margin: 0;
+}
+.delete-option{
+  margin-top: 10px;
+  
+}
+.delete-option button{
+  background-color: red;
+  margin: 10px;
+  border-radius: 5px;
 }
 .container-list{
   display: flex;

@@ -33,20 +33,22 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert("ok");
+    // alert("ok");
     let data = [...products];
     if (formData.productName === "") {
-      return false;
+      return alert("Product name is empty");
     }
     if (formData.price === "") {
-      return false;
+      return alert("Price is empty");
     }
+    
     if (isUpdate.status) {
       data.forEach((product) => {
         if (product.id === isUpdate.id) {
           product.productName = formData.productName;
           product.price = formData.price;
         }
+        // alert("Data berhasil diupdate")
       });
     } else {
       data.push({
@@ -54,10 +56,12 @@ function App() {
         productName: formData.productName,
         price: formData.price,
       });
+      alert("Data barhasil ditambahkan")
     }
     setIsUpdate({ id: null, status: false });
     setProducts(data);
-    setFormData({ productName: "", price: "" });
+    setFormData({ productName: "", price: ""});
+    
   }
 
   function handleUpdete(id) {
@@ -70,29 +74,33 @@ function App() {
   function handleDelete(id) {
     let data = [...products];
     let filteredData = data.filter((product) => product.id !== id);
+    alert("Data berhasil dihapus")
     setProducts(filteredData);
   }
 
   function handleChecked(e) {
     // alert("hallo")
-    const { value, checked } = e.target;
+    const { name, checked } = e.target;
     // console.log("ini value", value)
-    if (checked) {
-      setIsChecked([...isChecked, value]);
+    if (name === "allselect") {
+      const checkedValue = products.map((user) => {
+        return { ...user, isChecked: checked };
+      });
+      console.log(checkedValue);
+      setProducts(checkedValue);
     } else {
-      setIsChecked(isChecked.filter((e) => e !== value));
+      const checkedValue = products.map((product) =>
+        product.id === name ? { ...product, isChecked: checked } : product
+      );
+      console.log(checkedValue);
+      setProducts(checkedValue);
     }
   }
 
-  const handleDeleteAll = async () => {
-    console.log("ini checked", isChecked);
-    // setProducts(isChecked(""))
+  const handleDeleteSelected = () => {
     let data = [...products];
-    // if(products.id === isChecked){
-    //   setProducts(!isChecked)
-    // }
-    let filteredData = data.filter((product) => product.id == isChecked);
-    // setProducts(filteredData)
+    let filteredData = data.filter((product) => product.isChecked === false);
+    setProducts(filteredData);
     console.log(filteredData);
   };
 
@@ -129,11 +137,12 @@ function App() {
       </div>
       <List
         deleteAll={deleteAll}
-        handleDeleteAll={handleDeleteAll}
+        handleDeleteSelected={handleDeleteSelected}
         handleChecked={handleChecked}
         handleDelete={handleDelete}
         handleUpdate={handleUpdete}
         data={products}
+        isChecked={isChecked}
       />
     </>
   );
