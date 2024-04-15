@@ -33,7 +33,6 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // alert("ok");
     let data = [...products];
     if (formData.productName === "") {
       return alert("Product name is empty");
@@ -48,7 +47,6 @@ function App() {
           product.productName = formData.productName;
           product.price = formData.price;
         }
-        // alert("Data berhasil diupdate")
       });
     } else {
       data.push({
@@ -79,20 +77,19 @@ function App() {
   }
 
   function handleChecked(e) {
-    // alert("hallo")
     const { name, checked } = e.target;
     // console.log("ini value", value)
     if (name === "allselect") {
       const checkedValue = products.map((user) => {
         return { ...user, isChecked: checked };
       });
-      console.log(checkedValue);
+      // console.log(checkedValue);
       setProducts(checkedValue);
     } else {
       const checkedValue = products.map((product) =>
         product.id === name ? { ...product, isChecked: checked } : product
       );
-      console.log(checkedValue);
+      // console.log(checkedValue);
       setProducts(checkedValue);
     }
   }
@@ -101,7 +98,7 @@ function App() {
     let data = [...products];
     let filteredData = data.filter((product) => product.isChecked === false);
     setProducts(filteredData);
-    console.log(filteredData);
+    // console.log(filteredData);
   };
 
   const deleteAll = () => {
@@ -130,7 +127,9 @@ function App() {
               onChange={handleChange}
               value={formData.price}
             />
-            <button className="save">Save</button>
+            <button className="save">
+              {isUpdate.status ? ("Update") : ("save")}
+            </button>
           </form>
           <br />
         </div>

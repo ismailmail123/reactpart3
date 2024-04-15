@@ -5,6 +5,7 @@ function List({
   handleDelete,
   handleDeleteSelected,
   handleChecked,
+  isChecked
 }) {
   const locale = "id-ID";
   const option = {
@@ -14,7 +15,6 @@ function List({
   return (
     <div className="list">
       <h3>Product List</h3>
-
       {data.length <= 1 ? (
         ""
       ) : (
@@ -23,14 +23,13 @@ function List({
             <input
               type="checkbox"
               name="allselect"
-              checked={!data.some((user) => user?.isChecked !== true)}
+              checked={!data.some((product) => product?.isChecked !== true)}
               onChange={handleChecked}
             ></input>
             <p>Select All</p>
           </div>
         </>
       )}
-
       {data.length === 0 ? (
         <p>Data tidak ditemukan</p>
       ) : (
